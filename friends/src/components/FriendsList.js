@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import Friend from './Friend';
 import './FriendsList.css';
+import FriendForm from './FriendForm';
 
 class FriendsList extends Component {
     constructor(props){
@@ -22,12 +24,25 @@ class FriendsList extends Component {
             });
     }
 
+    HandleChanges = e => {
+        this.setState({ [e.target.name]: e.target.value});
+    }
+    // addFriend
+
     render(){
         return(
-            <div className='friends-list'>
-                {this.state.friends.map(friend => (
-                    <Friend key={friend.id} friend = {friend} />
-                ))}
+            <div className='big-box'>
+                <div className='friends-list'>
+                    {this.state.friends.map(friend => (
+                        <Friend key={friend.id} friend = {friend} />
+                    ))}
+                </div>
+                <Route
+                    exact path='/form'
+                    render={props => <FriendForm {...props}
+                        HandleChanges = {this.HandleChanges}
+                    />}
+                />
             </div>
         );
     }

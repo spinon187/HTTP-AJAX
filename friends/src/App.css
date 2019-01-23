@@ -51,10 +51,11 @@ border-spacing: 0;
   box-sizing: border-box;
 }
 
+body {background-color: navy}
+
 .App {
   display: flex;
   flex-direction: column;
   max-width: 800px;
   margin: auto;
-  background-color: navy;
 }
