@@ -1,0 +1,31 @@
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 50%;
+    padding: 1rem;
+    line-height: 2rem;
+    background-image: linear-gradient(to bottom right, blue, rgba(84, 67, 243, 0.685));
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: .5rem;
+}
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: 'Exo 2', sans-serif;
+    color: white;
+}
+
+p {
+    font-size: 1.2rem;
+    font-family: 'Exo 2', sans-serif;
+    color: white;
+}
