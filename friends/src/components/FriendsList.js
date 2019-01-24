@@ -4,6 +4,7 @@ import axios from 'axios';
 import Friend from './Friend';
 import './FriendsList.css';
 import FriendForm from './FriendForm';
+import UpdateForm from './UpdateForm';
 
 const emptyFriend = {
     name: '',
@@ -58,12 +59,24 @@ class FriendsList extends Component {
     RemoveFriend = (e, friendID) => {
         e.preventDefault();
         axios
-            .delete(`http://localhost:5000/friends/${friendID}`)
+            .put(`http://localhost:5000/friends/${friendID}`, this.state.friend)
+            .then(response => {
+                this.setState({friends: response.data});
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                console.error('Deletion Error', error);
+            })
+    }
+
+    UpdateFriend = friendID => {
+        axios
+            .put(`http://localhost:5000/friends/${friendID}`)
             .then(response => {
                 this.setState({friends: response.data});
             })
             .catch(error => {
-                console.error('Deletion Error', error);
+                console.error('Update Error', error);
             })
     }
 
@@ -71,9 +84,14 @@ class FriendsList extends Component {
         return(
             <div className='big-box'>
                 <div className='friends-list'>
-                    <NavLink to='/form'>
-                        <button className='friend-form-button'>Add More Friends</button>
-                    </NavLink>
+                    <div className='button-box'>
+                        <NavLink to='/form'>
+                            <button className='friend-form-button'>Add More Friends</button>
+                        </NavLink>
+                        <NavLink to='/update'>
+                            <button className='friend-form-button'>Update Friends</button>
+                        </NavLink>
+                    </div>
                     {this.state.friends.map(friend => (
                         <Route
                             path='/' 
@@ -94,6 +112,14 @@ class FriendsList extends Component {
                         AddFriend = {this.AddFriend}
                     />}
                 />
+                {/* <Route
+                    exact path='/update'
+                    render={props => <UpdateForm {...props}
+                        friend = {this.state.friend}
+                        HandleChanges = {this.HandleChanges}
+                        AddFriend = {this.AddFriend}
+                    />}
+                /> */}
             </div>
         );
     }
