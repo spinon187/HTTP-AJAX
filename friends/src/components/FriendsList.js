@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Friend from './Friend';
 import './FriendsList.css';
@@ -51,7 +51,19 @@ class FriendsList extends Component {
                 this.props.history.push('/');
             })
             .catch(error => {
-                console.error('Function Error', error);
+                console.error('Addition Error', error);
+            })
+    }
+
+    RemoveFriend = (e, friendID) => {
+        e.preventDefault();
+        axios
+            .delete(`http://localhost:5000/friends/${friendID}`)
+            .then(response => {
+                this.setState({friends: response.data});
+            })
+            .catch(error => {
+                console.error('Deletion Error', error);
             })
     }
 
@@ -59,8 +71,19 @@ class FriendsList extends Component {
         return(
             <div className='big-box'>
                 <div className='friends-list'>
+                    <NavLink to='/form'>
+                        <button className='friend-form-button'>Add More Friends</button>
+                    </NavLink>
                     {this.state.friends.map(friend => (
-                        <Friend key={friend.id} friend = {friend} />
+                        <Route
+                            path='/' 
+                            render={props => <Friend {...props}
+                                key={friend.id}
+                                friend = {friend} 
+                                friends = {this.state.friends}
+                                RemoveFriend = {this.RemoveFriend}
+                            />}
+                        />
                     ))}
                 </div>
                 <Route
