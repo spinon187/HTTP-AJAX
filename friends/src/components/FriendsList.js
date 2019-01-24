@@ -5,11 +5,18 @@ import Friend from './Friend';
 import './FriendsList.css';
 import FriendForm from './FriendForm';
 
+const emptyFriend = {
+    name: '',
+    age: '',
+    email: ''
+};
+
 class FriendsList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            friends: []
+            friends: [],
+            friend: emptyFriend
         };
     }
 
@@ -25,9 +32,28 @@ class FriendsList extends Component {
     }
 
     HandleChanges = e => {
-        this.setState({ [e.target.name]: e.target.value});
+        e.persist();
+        this.setState(prevState => {
+            return {
+                friend: {
+                    ...prevState.friend,
+                    [e.target.name]: e.target.value
+                }
+            };
+        });
     }
-    // addFriend
+    
+    AddFriend = () => {
+        axios
+            .post('http://localhost:5000/friends', this.state.friend)
+            .then(response => {
+                this.setState({friends: response.data});
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                console.error('Function Error', error);
+            })
+    }
 
     render(){
         return(
@@ -40,7 +66,9 @@ class FriendsList extends Component {
                 <Route
                     exact path='/form'
                     render={props => <FriendForm {...props}
+                        friend = {this.state.friend}
                         HandleChanges = {this.HandleChanges}
+                        AddFriend = {this.AddFriend}
                     />}
                 />
             </div>

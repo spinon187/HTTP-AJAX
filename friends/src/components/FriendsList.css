@@ -16,7 +16,7 @@
     align-items: baseline;
     padding: 1rem;
     line-height: 2rem;
-    background-image: linear-gradient(to bottom right, blue, rgba(84, 67, 243, 0.685));
+    background-image: linear-gradient(to bottom right, blue, rgba(4, 0, 36, 0.685));
     border: 2px solid white;
     border-radius: 5px;
     margin: .5rem;
@@ -44,7 +44,7 @@ p {
     width: 40%;
     padding: .5rem;
     line-height: 2rem;
-    background-image: linear-gradient(to bottom right, blue, rgba(84, 67, 243, 0.685));
+    background-image: linear-gradient(to bottom right, blue, rgba(4, 0, 36, 0.685));
     border: 2px solid white;
     border-radius: 5px;
     margin: .5rem;
@@ -56,7 +56,7 @@ p {
     padding: .5rem;
     margin-top: 1rem;
     width: 90%;
-    text-align: center;
+    /* text-align: center; */
     font-family: 'Exo 2', sans-serif;
     border-radius: 5px;
 }
@@ -68,6 +68,6 @@ p {
     text-align: center;
     font-family: 'Exo 2', sans-serif;
     border-radius: 5px;
-    background-image: linear-gradient(to bottom right, navy, white);
+    background-image: linear-gradient(to bottom right, rgb(1, 147, 214), white);
     color: white;
 }

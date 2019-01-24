@@ -51,7 +51,7 @@ border-spacing: 0;
   box-sizing: border-box;
 }
 
-body {background-color: navy}
+body {background-color: rgb(1, 147, 214)}
 
 .App {
   display: flex;

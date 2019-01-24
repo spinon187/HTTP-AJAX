@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 const FriendForm = props => {
     return (
@@ -8,18 +8,21 @@ const FriendForm = props => {
                 type='text'
                 name='name'
                 onChange={props.HandleChanges}
+                value={props.friend.name}
                 placeholder='Name'
             />
             <input
                 type='number'
                 name='age'
                 onChange={props.HandleChanges}
+                value={props.friend.age}
                 placeholder='Age'
             />
             <input
                 type='email'
                 name='email'
                 onChange={props.HandleChanges}
+                value={props.friend.email}
                 placeholder='Email Address'
             />
             <button type='submit'>Add Friend</button>
