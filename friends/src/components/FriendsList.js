@@ -44,6 +44,13 @@ class FriendsList extends Component {
         });
     }
     
+    UpdateChanges = e => {
+        this.setState({
+            friend: 
+            {[e.target.name]: e.target.value}
+        })
+    }
+
     AddFriend = () => {
         axios
             .post('http://localhost:5000/friends', this.state.friend)
@@ -70,8 +77,14 @@ class FriendsList extends Component {
     }
 
     UpdateFriend = friendID => {
+        const update = {
+            name: this.state.name,
+            age: this.state.age,
+            email: this.state.email
+        }
+
         axios
-            .put(`http://localhost:5000/friends/${friendID}`)
+            .put(`http://localhost:5000/friends/${friendID}`, update)
             .then(response => {
                 this.setState({friends: response.data});
             })
@@ -93,15 +106,27 @@ class FriendsList extends Component {
                         </NavLink>
                     </div>
                     {this.state.friends.map(friend => (
-                        <Route
-                            path='/' 
-                            render={props => <Friend {...props}
-                                key={friend.id}
-                                friend = {friend} 
-                                friends = {this.state.friends}
-                                RemoveFriend = {this.RemoveFriend}
-                            />}
-                        />
+                        <div className='friend-box'>
+                            <Route
+                                exact path='/update'
+                                render={() => <UpdateForm
+                                    friend={friend}
+                                    UpdateChanges = {this.UpdateChanges}
+                                    UpdateFriend = {this.UpdateFriend}
+                                />}
+                            />
+                            <Route
+                                path='/' 
+                                render={props => <Friend {...props}
+                                    key={friend.id}
+                                    friend = {friend} 
+                                    friends = {this.state.friends}
+                                    RemoveFriend = {this.RemoveFriend}
+                                    UpdateFriend = {this.UpdateFriend}
+                                    HandleChanges = {this.HandleChanges}
+                                />}
+                            />
+                        </div>
                     ))}
                 </div>
                 <Route

@@ -26,6 +26,7 @@
 .friend-box {
     display: flex;
     width: 100%;
+    justify-content: center;
 }
 .friend {
     display: flex;
@@ -38,6 +39,7 @@
     border-radius: 5px;
     margin: .5rem;
     min-width: 70%;
+    max-width: 100%;
 }
 
 .top-line {
